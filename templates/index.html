@@ -4,19 +4,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Red-harvest</title>
+    <title>Red-harvest | Media Downloader</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='app.js') }}" defer></script>
 </head>
 
 <body>
-    <h1>Red-harvest</h1>
-    <p>Your personal media downloader.</p>
+    <main class="app-container">
+        <header class="header">
+            <div class="logo">RH<span>.</span></div>
+            <div>
+                <h1>Red-harvest</h1>
+                <p class="subtitle">Your local media downloader</p>
+            </div>
+        </header>
 
-    <form>
-        <label for="url">Video URL</label>
-        <input id="url" name="url" type="url" placeholder="Paste a URL here" required>
+        <section class="download-card">
+            <div class="card-heading">
+                <h2>Download media</h2>
+                <p>Paste a media URL to get started.</p>
+            </div>
 
-        <button type="submit">Download</button>
-    </form>
+            <form id="download-form">
+                <label for="url">Media URL</label>
+                <input type="url" id="url" name="url" placeholder="https://example.com/video" required>
+
+                <div class="field-group">
+                    <div class="field">
+                        <label for="media-type">Media type</label>
+                        <select id="media-type" name="media_type">
+                            <option value="video">Video</option>
+                            <option value="audio">Audio (MP3)</option>
+                        </select>
+                    </div>
+
+                    <div class="field" id="quality-field">
+                        <label for="quality">Video quality</label>
+                        <select id="quality" name="quality">
+                            <option value="best">Best available</option>
+                            <option value="1080">1080p</option>
+                            <option value="720">720p</option>
+                            <option value="480">480p</option>
+                            <option value="360">360p</option>
+                        </select>
+                    </div>
+                </div>
+
+                <label for="download-dir">Download directory</label>
+                <input type="text" id="download-dir" name="download_dir"
+                    placeholder="Leave empty to use the default folder">
+                <p class="hint">Leave empty to save in the project's downloads folder.</p>
+
+                <label class="checkbox-row" for="playlist">
+                    <input type="checkbox" id="playlist" name="playlist">
+                    <span>Download the entire playlist, if applicable</span>
+                </label>
+
+                <button type="submit" id="download-button">
+                    <span id="button-text">Download</span>
+                    <span id="spinner" class="spinner hidden"></span>
+                </button>
+
+                <div id="progress-container" class="progress-container hidden">
+                    <div class="progress-info">
+                        <span id="progress-label">Preparing download...</span>
+                        <span id="progress-percent">0%</span>
+                    </div>
+
+                    <div class="progress-track" role="progressbar" aria-label="Download progress" aria-valuemin="0"
+                        aria-valuemax="100" aria-valuenow="0" id="progress-track">
+                        <div id="progress-fill" class="progress-fill"></div>
+                    </div>
+
+                    <p id="progress-details" class="hint"></p>
+                </div>
+
+
+                <div id="status" class="status hidden" role="status" aria-live="polite"></div>
+            </form>
+        </section>
+
+        <footer>
+            <p>Red-harvest · Runs locally on your computer</p>
+        </footer>
+    </main>
 </body>
 
 </html>
