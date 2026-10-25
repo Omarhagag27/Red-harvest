@@ -1,23 +1,37 @@
 # Red-harvest
 
-An extensible Python media downloader built on [yt-dlp](https://github.com/yt-dlp/yt-dlp), featuring a local web interface for downloading videos and audio, selecting video quality, downloading playlists, customizing output directories, and tracking download progress.
+Red-harvest is a Python-based media downloader with a local Flask web interface. Powered by yt-dlp and FFmpeg, it supports video and audio downloads, quality selection, playlist downloads, custom output directories, and real-time progress tracking. FFmpeg handles media processing tasks such as audio extraction, MP3 conversion, and merging separate audio and video streams when needed.
 
 ## Features
 
 - [x] Download videos
-- [x] Download audio (MP3)
+- [x] Download audio as MP3
 - [x] Video quality selection
 - [x] Playlist support
 - [x] Custom download directory
 - [x] Local web interface
 - [x] Background downloads
-- [x] Real-time download progress
-- [ ] Advanced file naming options
+- [x] Download progress tracking
+- [x] Download status and error reporting
+- [ ] Automatic file renaming
+- [ ] Automated tests
 - [ ] Interactive CLI
 - [ ] Desktop GUI
 - [ ] Configuration file
 - [ ] Batch downloads
 - [ ] Download queue and cancellation
+
+## Screenshots
+
+### Main Interface
+
+![Red-harvest main interface](docs/images/main-page.png)
+
+### Download Progress
+
+![Red-harvest download progress](docs/images/download-progress.png)
+
+> Replace these image paths with your actual screenshots. Create the `docs/images/` directory and add the corresponding PNG files.
 
 ## Technologies
 
@@ -25,62 +39,141 @@ An extensible Python media downloader built on [yt-dlp](https://github.com/yt-dl
 - Flask
 - yt-dlp
 - FFmpeg
-- HTML
-- CSS
-- JavaScript
+- HTML, CSS, and JavaScript
+- pytest (for automated testing)
 
 ## Requirements
 
 - Python 3.10 or later
-- FFmpeg installed and available on your system's PATH
-- An internet connection for downloading media
+- FFmpeg
+- Git
+- An internet connection
 
 ## Installation
 
-Clone the repository:
+### Windows
 
-```bash
-git clone https://github.com/Omarhagag27/Red-harvest.git
-cd Red-harvest
-```
+1. Clone the repository:
 
-Create and activate a virtual environment:
+   ```bash
+   git clone https://github.com/Omarhagag27/Red-harvest.git
+   cd Red-harvest
+   ```
 
-```bash
-python -m venv .venv
-```
+2. Create and activate a virtual environment:
 
-Windows:
+   ```bash
+   python -m venv .venv
+   .venv\Scripts\activate
+   ```
 
-```bash
-.venv\Scripts\activate
-```
+3. Install the Python dependencies:
 
-Install the dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-```bash
-pip install -r requirements.txt
-```
+4. Install FFmpeg and make sure it is available through your system's `PATH`.
 
-Install FFmpeg separately if it is not already installed.
+### Linux (Ubuntu/Debian)
+
+1. Install the required system packages:
+
+   ```bash
+   sudo apt update
+   sudo apt install python3 python3-venv python3-pip git ffmpeg
+   ```
+
+2. Clone the repository:
+
+   ```bash
+   git clone https://github.com/Omarhagag27/Red-harvest.git
+   cd Red-harvest
+   ```
+
+3. Create and activate a virtual environment:
+
+   ```bash
+   python3 -m venv .venv
+   source .venv/bin/activate
+   ```
+
+4. Install the Python dependencies:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+5. Verify that FFmpeg is installed:
+
+   ```bash
+   ffmpeg -version
+   ```
+
+   If the command displays version information, FFmpeg is available.
+
+### macOS
+
+1. Install Python, Git, and FFmpeg. If you use Homebrew:
+
+   ```bash
+   brew install python git ffmpeg
+   ```
+
+2. Clone the repository:
+
+   ```bash
+   git clone https://github.com/Omarhagag27/Red-harvest.git
+   cd Red-harvest
+   ```
+
+3. Create and activate a virtual environment:
+
+   ```bash
+   python3 -m venv .venv
+   source .venv/bin/activate
+   ```
+
+4. Install the dependencies:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
 
 ## Usage
 
-Start the application:
+1. Activate your virtual environment if it is not already active.
+2. Start the application:
+
+   ```bash
+   python app.py
+   ```
+
+   On Linux or macOS, you can also use `python3 app.py` if needed.
+
+3. Open your browser and navigate to:
+
+   `http://127.0.0.1:5000`
+
+4. Enter a media URL, select the download options, and click **Download**.
+
+Downloaded files are saved to the `downloads/` directory by default. You can specify a different output directory through the interface.
+
+## Running Tests
+
+Automated tests are planned but are not fully implemented yet.
+
+Once the tests are added, install pytest in your activated virtual environment:
 
 ```bash
-python app.py
+pip install pytest
 ```
 
-Open the following address in your browser:
+Run the test suite from the project root:
 
-```text
-http://127.0.0.1:5000
+```bash
+pytest
 ```
-
-Enter a media URL, select the desired format and quality, configure the output directory if needed, and press **Download**.
-
-Downloaded files are saved to the project's `downloads/` directory by default.
 
 ## Project Structure
 
@@ -94,37 +187,33 @@ Red-harvest/
 ├── static/
 │   ├── style.css
 │   └── app.js
+├── docs/
+│   └── images/
 ├── downloads/
 ├── tests/
 └── requirements.txt
 ```
 
-- `app.py` — Flask application and HTTP endpoints.
-- `red_harvest/downloader.py` — Download logic and progress reporting.
-- `templates/index.html` — Web interface structure.
-- `static/style.css` — Interface styling.
-- `static/app.js` — Browser interactions and progress polling.
-- `downloads/` — Default output directory.
-- `tests/` — Automated tests (planned).
-
 ## Roadmap
 
-- [x] Implement video downloading
-- [x] Build a local web interface
-- [x] Add audio extraction
-- [x] Add video quality selection
-- [x] Add playlist support
-- [x] Support custom output directories
-- [x] Implement background downloads
-- [x] Add download progress tracking
-- [ ] Improve file naming and organization
-- [ ] Add automated tests
-- [ ] Implement an interactive CLI
-- [ ] Add a configuration file
-- [ ] Support batch downloads
-- [ ] Add download queue management and cancellation
-- [ ] Improve error handling and download history
+- [x] Download a single video
+- [x] Download audio as MP3
+- [x] Video quality selection
+- [x] Playlist support
+- [x] Custom download directory
+- [x] Local web interface
+- [x] Background downloads
+- [x] Progress tracking
+- [ ] Automatic file renaming
+- [ ] Automated unit and API tests
+- [ ] Integration tests
+- [ ] Interactive CLI
+- [ ] Desktop GUI
+- [ ] Configuration file
+- [ ] Batch downloads
+- [ ] Download queue and cancellation
+- [ ] Cross-platform testing on Windows, Linux, and macOS
 
 ## License
 
-MIT
+This project is licensed under the MIT License.
